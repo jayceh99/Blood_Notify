@@ -34,7 +34,7 @@ def test():
     options = Options()
     options.add_argument("--disable-notifications")
     options.add_argument("headless")
-    chrome = webdriver.Chrome(r'C:\Users\alok\Desktop\test/chromedriver', chrome_options=options)
+    chrome = webdriver.Chrome(r'./chromedriver', chrome_options=options)
     chrome.get("https://www.tp.blood.org.tw/Internet/taipei/LocationWeek.aspx?site_id=2")
     time.sleep(2)
     x = chrome.find_element_by_id('CalendarContentWeek')
