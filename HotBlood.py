@@ -14,7 +14,7 @@ class hot_blood ():
                 "Content-Type": "application/x-www-form-urlencoded"} 
 
     def line_notify(self,message): 
-
+        
         params = {'message':message}
 
         r = requests.post("https://notify-api.line.me/api/notify",headers=self.headers, params=params)
@@ -41,17 +41,12 @@ class hot_blood ():
                 if '新莊區' in x[j][int(i)]:
                     tmp = tmp+week[j]+':  '+x[j][int(i)]+'\n'
         return tmp
-
+def check_time():
+    pass
 def main ():
-    print (datetime.datetime.now() +relativedelta(months=3))
-    nowtime = datetime.datetime.now() + relativedelta(months=3)
-    unixtime = time.mktime(nowtime.timetuple())
-    #print (unixtime)
 
-
-
-    #hot_blood_q =hot_blood()
-    #hot_blood_q.line_notify(hot_blood_q.get_blood())
+    hot_blood_q =hot_blood()
+    hot_blood_q.line_notify(hot_blood_q.get_blood())
 
 #    test()
 if __name__ == '__main__':

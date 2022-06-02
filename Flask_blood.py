@@ -1,7 +1,10 @@
+from distutils.log import info
 import requests
 from flask import Flask
 import time
+import datetime
 from selenium import webdriver
+from dateutil.relativedelta import relativedelta
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 
@@ -26,12 +29,18 @@ def get_blood():
     return tmp
     
 app = Flask(__name__)
-@app.route("/m3",methods=['GET'])
-def m3():
-    #hot_blood_q = get_blood()
-    m3_r = get_blood()
-    #hot_blood_q.line_notify(m3_r)
-    return m3_r
+@app.route("/now",methods=['GET'])
+def now_info():
+    now_info = get_blood()
+    return now_info
+@app.route("/update" , methods=['GET'])
+def test():
+    nowtime = datetime.datetime.now() + relativedelta(months=3)
+    unixtime = time.mktime(nowtime.timetuple())
+    f = open('time.txt','w')
+    f.write(str(unixtime))
+    f.close()
+    #return str(unixtime)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=8080,debug=True,threaded=True)
+    app.run(host='0.0.0.0',port=61000,debug=True,threaded=True)
