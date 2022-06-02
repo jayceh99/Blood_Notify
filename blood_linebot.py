@@ -20,9 +20,9 @@ app = Flask(__name__)
 
 
 # Channel Access Token
-line_bot_api = LineBotApi('nHhd4q23X2pAfax7gYDrS7XD5l0x4UcVf+pvez2oJaYei3BIUPO06fHLy+LQhmufWQ4Wc9462zxVQGI1d45p0xhJDj+XWkNq6qNScu4E0pMrQdrdY2dKqCJJUBtVWQsyXBbEbgNzUbBqqja9mkRQuwdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('kkkkkkey')
 # Channel Secret
-handler = WebhookHandler('b1405ae50a050a911b3f4ad5d086727b')
+handler = WebhookHandler('kkkkkkey')
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route('/callback', methods=['POST'])
@@ -51,12 +51,12 @@ def handle_message(event):
     
 
     if input_text == '1':
-        req = requests.get('http://120.125.82.180:61000/update')
+        req = requests.get('http://iiiiip:61000/update')
         req = req.text
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='捐血時間已更新'))
 
     elif input_text == '2':
-        req = requests.get('http://120.125.82.180:61000/now')
+        req = requests.get('http://iiiiip:61000/now')
         req =req.text
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=req))
         
