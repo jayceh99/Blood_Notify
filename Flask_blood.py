@@ -24,8 +24,10 @@ def get_blood():
         x[i] = x[i].split('\n')
     for j in range (1,8):
         for i in range (0,len(x[j])):
-            if '新莊區' in x[j][int(i)]:
+            if '林口區' in x[j][int(i)]:
                 tmp = tmp+week[j]+':  '+x[j][int(i)]+'\n'
+    if tmp == '\n':
+        tmp = '這週沒有捐血車~'
     return tmp
     
 app = Flask(__name__)
@@ -40,7 +42,7 @@ def test():
     f = open('time.txt','w')
     f.write(str(unixtime))
     f.close()
-    #return str(unixtime)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=61000,debug=True,threaded=True)

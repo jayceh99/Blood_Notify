@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 class hot_blood ():
     def __init__(self) :
         self.headers = {
-                "Authorization": "Bearer " + "YDvHAZh3EACktDHWAoMuUyWiIDBOYqbJnllwYr01DjS",
+                "Authorization": "Bearer " + "ttttttoken",
                 "Content-Type": "application/x-www-form-urlencoded"} 
 
     def line_notify(self,message): 
@@ -38,16 +38,31 @@ class hot_blood ():
         for j in range (1,8):
             #print (j)
             for i in range (0,len(x[j])):
-                if '新莊區' in x[j][int(i)]:
+                if '林口區' in x[j][int(i)]:
                     tmp = tmp+week[j]+':  '+x[j][int(i)]+'\n'
+        if tmp == '\n':
+            tmp = '這週沒有捐血車~'
         return tmp
+def monitor ():
+    ip = 'iiiip'
+    seconds_since_epoch = time.time()
+    seconds_since_epoch = seconds_since_epoch * 1000000000
+    seconds_since_epoch  = format(seconds_since_epoch , '.0f')
+    data =  "BloodNotify,host=180 Live=1  %s" % (seconds_since_epoch)
+    url = 'http://'+ip+':8086/write?consistency=any&db=telegraf' 
+    response = requests.post(url, data,headers={'Connection':'close'},timeout = 5)
+
 def check_time():
     pass
 def main ():
-
-    hot_blood_q =hot_blood()
-    hot_blood_q.line_notify(hot_blood_q.get_blood())
-
+    f = open('time.txt','r')
+    time_q = f.read()
+    if float(time_q) < time.time():
+        hot_blood_q =hot_blood()
+        hot_blood_q.line_notify(hot_blood_q.get_blood())
+        monitor()
+    else:
+        monitor()
 #    test()
 if __name__ == '__main__':
     main()
